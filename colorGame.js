@@ -1,19 +1,25 @@
-var colors = ["red", "yellow", "blue", "green", "orange", "pink"] ;
+var colors = []; 
 var boxes = document.querySelectorAll(".boxes");
 var heading = document.querySelector("h1");
 var message = document.querySelector("#message");
-var realColor = colors[Math.floor(Math.random()*7)];
+var reset = document.querySelector("#reset");
+var colorDisplay = document.querySelector("#colorDisplay");
+var realColor;
 var i;
 
+setBoxes();
 
+function setBoxes(){
+	for(i=0; i<6; i++){
+		colors.push(setColor());
+	}
+	realColor = colors[Math.floor(Math.random()*6)];
+	colorDisplay.textContent = realColor;
 
-
-
-
-
-//Providing color to boxes
-for(i=0; i<6; i++){
-	boxes[i].style.background = colors[i] ;
+	//Providing color to boxes
+	for(i=0; i<6; i++){
+		boxes[i].style.background = colors[i] ;
+	}
 }
 
 //Clicking on boxes
@@ -24,17 +30,36 @@ for(i=0; i<6; i++){
 			console.log("You picked right Color");
 			heading.style.background = realColor;
 			message.textContent = "Correct";
+			reset.textContent = "Play Again?";
 			for(i=0; i<6; i++){
 				boxes[i].style.background = realColor;
 			}
 		}
 		else{
+			console.log(this.style.background);
+			console.log(realColor);
 			this.style.background = "#232323";
 			message.textContent = "Try Again";
+
 		}
 		
 	})
 }
 
+reset.addEventListener('click', function(){
+	reset.textContent = "New Colors";
+	message.textContent = "";
+	heading.style.background = "steelblue";
+	colors = [];
+	setBoxes();
+})
 
 
+function setColor(){
+	
+	var r = Math.floor(Math.random()*256);
+	var g = Math.floor(Math.random()*256);
+	var b = Math.floor(Math.random()*256);
+
+	return "rgb(" + r +", " + g +", " + b + ")" ;
+}
