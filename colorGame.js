@@ -10,45 +10,53 @@ var i;
 var n=6;
 
 setBoxes();
+setModes();
+clickBoxes();
+resetButton();
 
-for(i=0; i<2; i++){
-	mode[i].addEventListener('click', function(){
-		mode[0].classList.remove("selected");
-		mode[1].classList.remove("selected");
-		this.classList.add("selected");
-		this.textContent === "Easy" ? n = 3: n = 6;
+
+function resetButton(){
+	reset.addEventListener('click', function(){
+		reset.textContent = "New Colors";
+		message.textContent = "";
+		heading.style.background = "steelblue";
+		colors = [];
 		setBoxes();
 	})
-}
+}	
 
-
-//Clicking on boxes
-for(i=0; i<n; i++){
-	boxes[i].addEventListener('click', function(){
-		//if it is real color
-		if(this.style.background === realColor){
-			heading.style.background = realColor;
-			message.textContent = "Correct";
-			reset.textContent = "Play Again?";
-			for(i=0; i<n; i++){
-				boxes[i].style.background = realColor;
+function clickBoxes(){
+	for(i=0; i<n; i++){
+		boxes[i].addEventListener('click', function(){
+			//if it is real color
+			if(this.style.background === realColor){
+				heading.style.background = realColor;
+				message.textContent = "Correct";
+				reset.textContent = "Play Again?";
+				for(i=0; i<n; i++){
+					boxes[i].style.background = realColor;
+				}
 			}
-		}
-		else{
-			this.style.background = "#232323"; 
-			message.textContent = "Try Again";
-		}
-		
-	})
+			else{
+				this.style.background = "#232323"; 
+				message.textContent = "Try Again";
+			}
+			
+		})
+	}
 }
 
-reset.addEventListener('click', function(){
-	reset.textContent = "New Colors";
-	message.textContent = "";
-	heading.style.background = "steelblue";
-	colors = [];
-	setBoxes();
-})
+function setModes(){
+	for(i=0; i<2; i++){
+		mode[i].addEventListener('click', function(){
+			mode[0].classList.remove("selected");
+			mode[1].classList.remove("selected");
+			this.classList.add("selected");
+			this.textContent === "Easy" ? n = 3: n = 6;
+			setBoxes();
+		})
+	}
+}
 
 
 function setBoxes(){
@@ -58,6 +66,7 @@ function setBoxes(){
 	}
 	realColor = colors[Math.floor(Math.random()*n)];
 	colorDisplay.textContent = realColor;
+	heading.style.background = "steelblue";
 
 	//Providing color to boxes
 	for(i=0; i<6; i++){
