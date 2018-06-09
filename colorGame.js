@@ -24,7 +24,7 @@ for(i=0; i<6; i++){
 			}
 		}
 		else{
-			this.style.background = "#232323";
+			this.style.background = "#232323"; 
 			message.textContent = "Try Again";
 		}
 		
