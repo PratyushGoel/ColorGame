@@ -9,25 +9,13 @@ var i;
 
 setBoxes();
 
-function setBoxes(){
-	for(i=0; i<6; i++){
-		colors.push(setColor());
-	}
-	realColor = colors[Math.floor(Math.random()*6)];
-	colorDisplay.textContent = realColor;
 
-	//Providing color to boxes
-	for(i=0; i<6; i++){
-		boxes[i].style.background = colors[i] ;
-	}
-}
 
 //Clicking on boxes
 for(i=0; i<6; i++){
 	boxes[i].addEventListener('click', function(){
 		//if it is real color
 		if(this.style.background === realColor){
-			console.log("You picked right Color");
 			heading.style.background = realColor;
 			message.textContent = "Correct";
 			reset.textContent = "Play Again?";
@@ -36,11 +24,8 @@ for(i=0; i<6; i++){
 			}
 		}
 		else{
-			console.log(this.style.background);
-			console.log(realColor);
 			this.style.background = "#232323";
 			message.textContent = "Try Again";
-
 		}
 		
 	})
@@ -53,6 +38,20 @@ reset.addEventListener('click', function(){
 	colors = [];
 	setBoxes();
 })
+
+
+function setBoxes(){
+	for(i=0; i<6; i++){
+		colors.push(setColor());
+	}
+	realColor = colors[Math.floor(Math.random()*6)];
+	colorDisplay.textContent = realColor;
+
+	//Providing color to boxes
+	for(i=0; i<6; i++){
+		boxes[i].style.background = colors[i] ;
+	}
+}
 
 
 function setColor(){
